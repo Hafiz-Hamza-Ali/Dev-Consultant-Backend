@@ -13,89 +13,37 @@ const UserOTPverification = db.UserOTPverification;
 const path = require("path");
 class UserService {
   static userCreate = asyncHandler(async (req, res) => {
-    try {
+    //try {
       const {
-        firstName,
-        lastName,
-        userName,
-        dateOfBirth,
-        gender,
-        phoneNumber,
+       name,
         email,
         password,
-        companyName,
-        description,
-        speciality,
-        accraNumber,
-        location,
-        socialMediaLink,
-        contractor,
-        role,
         confirmPassword,
-        categoryId,
+        phone,
       } = req.body;
-
-      const { profilePhoto, uploadFiles, uploadPortfolio } = req.files;
-      const uploadPortfolioData = [];
-      const uploadFilesData = [];
-      if (uploadFiles) {
-        uploadFiles.map(async (arrayval, keyval) => {
-          const val = {
-            filename: arrayval.filename,
-          };
-          uploadFilesData.push(val);
-        });
-      }
-      if (uploadPortfolio) {
-        uploadPortfolio.map(async (arrayval, keyval) => {
-          const val = {
-            filename: arrayval.filename,
-          };
-          uploadPortfolioData.push(val);
-        });
-      }
-      const uploadFilesJson = JSON.stringify(uploadFilesData);
-      const uploadPortfolioJson = JSON.stringify(uploadPortfolioData);
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(password, salt);
       const confirmPasswords = await bcrypt.hash(confirmPassword, salt);
+      
       const user = await User.create({
-        firstName: firstName,
-        lastName: lastName,
-        userName: userName,
-        dateOfBirth: dateOfBirth,
-        gender: gender,
-        profilePhoto:
-          profilePhoto && profilePhoto[0] ? profilePhoto[0].filename : null,
-        description: description,
-        companyName: companyName,
-        speciality: speciality,
-        accraNumber: accraNumber,
-        location: location,
-        role: role,
-        socialMediaLink: socialMediaLink,
-        uploadFiles: uploadFiles ? uploadFilesJson : null,
-        uploadPortfolio: uploadPortfolio ? uploadPortfolioJson : null,
-        contractor: contractor,
+        Name: name,
         email: email,
         password: hashPassword,
-        phoneNumber: phoneNumber,
-        confirmPassword: confirmPasswords,
-        categoryId: categoryId,
+        phone: phone,
       });
-
-      await user.save().then((result) => this.mailVerification(result, res));
+      console.log('1345')
+      await user.save();
       res.status(201).send({
         status: "success",
-        message: "OTP has been sent to your registered email",
+        message: "User Created Successfully.",
         userId: user.id,
       });
-    } catch (error) {
-      res.status(500).send({
-        status: "failed",
-        message: "Unable to register user: " + error.message,
-      });
-    }
+    // } catch (error) {
+    //   res.status(500).send({
+    //     status: "failed",
+    //     message: "Unable to register user: " + error.message,
+    //   });
+    // }
   });
   static mailVerification = asyncHandler(async ({ id, email }, res) => {
     try {

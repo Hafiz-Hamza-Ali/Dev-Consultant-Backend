@@ -7,7 +7,7 @@ const validator = require("validator");
 class UserValidate {
   static validateFields = async (req, res) => {
     const {
-      firstName,
+    //  firstName,
       lastName,
       userName,
       dateOfBirth,
@@ -28,7 +28,7 @@ class UserValidate {
       const { uploadFiles, uploadPortfolio } = req.files;
       if (role == "customer") {
         if (
-          firstName &&
+        //  firstName &&
           lastName &&
           userName &&
           gender &&

@@ -9,29 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      name: {
         type: Sequelize.STRING,
         allowNull: true,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      userName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      dateOfBirth: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-      gender: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      phoneNumber: {
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
@@ -41,56 +21,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      profilePhoto: {
+      phone: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-      companyName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
-      categoryId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: "Categories",
-          key: "id",
-        },
-      },
-      speciality: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      accraNumber: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      location: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      socialMediaLink: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      uploadFiles: {
-        type: Sequelize.JSON,
-        allowNull: true,
-      },
-      uploadPortfolio: {
-        type: Sequelize.JSON,
-        allowNull: true,
-      },
-      contractor: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
+    
       role: {
-        type: Sequelize.ENUM("customer", "company", "contractor", "admin"),
+        type: Sequelize.ENUM("customer","admin"),
         allowNull: false,
         defaultValue: "customer",
       },
