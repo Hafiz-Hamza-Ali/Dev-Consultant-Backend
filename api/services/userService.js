@@ -15,7 +15,7 @@ class UserService {
   static userCreate = asyncHandler(async (req, res) => {
     //try {
       const {
-       name,
+        name,
         email,
         password,
         confirmPassword,
@@ -26,7 +26,7 @@ class UserService {
       const confirmPasswords = await bcrypt.hash(confirmPassword, salt);
       
       const user = await User.create({
-        Name: name,
+        name: name,
         email: email,
         password: hashPassword,
         phone: phone,
@@ -38,12 +38,6 @@ class UserService {
         message: "User Created Successfully.",
         userId: user.id,
       });
-    // } catch (error) {
-    //   res.status(500).send({
-    //     status: "failed",
-    //     message: "Unable to register user: " + error.message,
-    //   });
-    // }
   });
   static mailVerification = asyncHandler(async ({ id, email }, res) => {
     try {
@@ -194,11 +188,10 @@ class UserService {
           if (user.email === email && isMatch) {
             // Generate JWT Token
             const token = jwt.sign(
-              { userID: user._id },
+              { userID: user.id },
               process.env.JWT_SECRET_KEY,
               { expiresIn: "5d" }
             );
-
             //  getSubscription.status = "expired";
 
             req.session.token = token;
@@ -221,12 +214,6 @@ class UserService {
             message: "User is not Verified",
           });
         }
-        // } else {
-        //   res.status(400).send({
-        //     status: "failed",
-        //     message: "User Don't have a permission to login.",
-        //   });
-        // }
       } else {
         res.status(400).send({
           status: "failed",

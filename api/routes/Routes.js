@@ -37,7 +37,6 @@ module.exports = (app) => {
   router.post("/resetpassword", UserController.resetPassword);
   router.post("/resetotp", UserController.resetOTPVerify);
   router.put("/updatepassword", UserController.updateNewPassword);
- 
-
+  
   app.use("/api/users", router);
 };
