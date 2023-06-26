@@ -12,11 +12,10 @@ class UserController {
     console.log("12345")
     // const requiredParams = await UserValidation.validateFields(req, res);
 
-    // const uniqueEmail = await UserValidation.validateAndCheckUniqueEmail(
-    //   req,
-    //   res
-    // );
-   
+    const uniqueEmail = await UserValidation.validateAndCheckUniqueEmail(
+      req,
+      res
+    );
     // const uniqueName = await UserValidation.uniqueUserName(req, res);
     // const passwordLength = await UserValidation.validatePassword(req, res);
 
@@ -28,25 +27,27 @@ class UserController {
     //   res.status(400).send(requiredParams);
     // } else if (uniqueName != true) {
     //   res.status(400).send(uniqueName);
-    // } else if (uniqueEmail != true) {
-    //   res.status(400).send(uniqueEmail);
+    // } else 
+    if (uniqueEmail != true) {
+      res.status(400).send(uniqueEmail);
+    }
     // } else if (passwordLength != true) {
     //   res.status(400).send(passwordLength);
     // } else if (passwordConfirm != true) {
     //   res.status(400).send(passwordConfirm);
     // } else if (profilePhoto != true) {
     //   res.status(400).send(profilePhoto);
-    // } else {
+    // } 
+    else {
     //   try {
-      
-        const saved_user = await UserService.userCreate(req, res);
+      const saved_user = await UserService.userCreate(req, res);
       // } catch (error) {
       //   res.status(500).send({
       //     status: "failed",
       //     message: "Unable to Register" + error.message,
       //   });
       // }
-    //}
+    }
   });
   static verifyOTP = asyncHandler(async (req, res) => {
     try {

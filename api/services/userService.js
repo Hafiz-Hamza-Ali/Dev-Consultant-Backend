@@ -127,14 +127,12 @@ class UserService {
               {
                 is_verified: true,
               },
-
               {
                 where: {
                   id: userId,
                 },
               }
             );
-
             await UserOTPverification.destroy({
               where: {
                 userId: userId,
